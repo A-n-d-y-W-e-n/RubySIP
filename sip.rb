@@ -13,8 +13,8 @@ class Request
 
 	def parse msg
 		(header, body) = msg.split /\r\n\r\n/
-		puts "\033[32m#{header}\033[m"
-		puts "\033[36m#{body}\033[m"
+		puts header
+		puts body
 		# parse header and put into hash
     header.split("\n").each {|line|
 			case line.chomp!
@@ -39,7 +39,7 @@ class Request
 		when 'ACK' then ack
 		end
 		# return response
-		print "\033[33m#{response}\033[m"
+		print response
 		return response
 	end
 

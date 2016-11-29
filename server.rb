@@ -10,17 +10,10 @@ class SIPServer
 			(msg, addr) = sockfd.recvfrom MAXLEN
 			response = Request.new.parse(msg).process
 			sockfd.send(response, 0, addr[3], addr[1]) if response != nil
-			$usertable.each {|user| puts "\033[31m#{user.inspect}\033[m" }
+			$usertable.each {|user| puts user.inspect}
 			puts ''
 		end
 	end
 end
 
-# main
-if ARGV.size != 1 then
-	puts 'usage: ' + __FILE__ + ' <port>'
-	exit -1
-end
-Signal.trap("INT") { exit -1 }
-Signal.trap("TERM") { exit -1 }
-SIPServer.new ARGV[0].to_i
+SIPServer.new 5060
